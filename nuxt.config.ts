@@ -5,6 +5,18 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  app: {
+    head: {
+      title: 'Mi tienda de servicios',
+      meta: [
+        {
+          name: 'description',
+          content: 'Bienvenido a mi tienda de servicios generales.',
+        },
+      ],
+    },
+  },
+
   modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image'],
 
   // SPA - Single Page Application
@@ -13,4 +25,14 @@ export default defineNuxtConfig({
   //   preset: 'static',
   //   static: true,
   // },
+
+  // Prender - Todo el sitio
+  nitro: {
+    prerender: {
+      routes: ['/', '/about', '/contact', '/pricing', '/products'],
+      ignore: ['/dashboard', '/dashboard/**'],
+      // Habilitar el crawling para descubrir enlaces automáticamente
+      crawlLinks: true,
+    },
+  },
 });
