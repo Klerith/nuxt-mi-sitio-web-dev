@@ -6,4 +6,11 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image'],
+
+  // SPA - Single Page Application
+  // ssr: false,
+  // nitro: {
+  //   preset: 'static',
+  //   static: true,
+  // },
 });
