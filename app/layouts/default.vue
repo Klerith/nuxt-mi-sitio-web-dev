@@ -1,7 +1,8 @@
 <template>
   <div class="flex flex-col h-screen">
-    <MainNavigation />
-    <main class="container mx-auto flex-1">
+    <!-- <MainNavigation /> -->
+    <SharedHeader />
+    <main class="container mx-auto flex-1 mt-2">
       <slot />
     </main>
 
