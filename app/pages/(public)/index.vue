@@ -1,3 +1,7 @@
 <template>
-  <SharedCTA />
+  <HomeCTA />
+
+  <HomeFeatures />
+
+  <HomeTestimonials />
 </template>
