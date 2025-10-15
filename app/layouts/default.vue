@@ -1,6 +1,10 @@
 <template>
-  <div>
+  <div class="flex flex-col h-screen">
     <MainNavigation />
-    <slot />
+    <main class="container mx-auto flex-1">
+      <slot />
+    </main>
+
+    <SharedFooter />
   </div>
 </template>
