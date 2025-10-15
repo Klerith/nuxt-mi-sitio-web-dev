@@ -10,6 +10,11 @@ const items = computed<NavigationMenuItem[]>(() => [
     active: route.path.startsWith('/products'),
   },
   {
+    label: 'Precios',
+    to: '/pricing',
+    active: route.path.startsWith('/pricing'),
+  },
+  {
     label: 'Nosotros',
     to: '/about',
     active: route.path.startsWith('/about'),

@@ -1,0 +1,20 @@
+<template>
+  <UPageSection
+    title="Stack"
+    description="Nuestra stack tecnológica."
+    headline="Stack"
+  />
+
+  <UMarquee>
+    <UIcon name="i-simple-icons-github" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-x" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-nuxtdotjs" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-cloudflare" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-tailwindcss" class="size-10 shrink-0" />
+    <UIcon name="i-simple-icons-vercel" class="size-10 shrink-0" />
+  </UMarquee>
+</template>
