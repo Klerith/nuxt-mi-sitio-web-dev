@@ -3,7 +3,7 @@
     <!-- <MainNavigation /> -->
     <SharedHeader />
     <!-- <main class="container mx-auto flex-1 mt-2"> -->
-    <UMain class="container mx-auto mt-2">
+    <UMain class="container mx-auto flex-1 mt-2">
       <slot />
     </UMain>
     <!-- </main> -->

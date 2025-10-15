@@ -1,7 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h1>Home Page</h1>
-  </div>
+  <UPage>
+    <UPageHeader
+      title="Inicio"
+      description="Bienvenido a mi sitio web"
+      headline="Mi sitio web"
+    />
+  </UPage>
 </template>
