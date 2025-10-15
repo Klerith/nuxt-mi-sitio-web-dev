@@ -54,6 +54,36 @@ const sections = [
     ],
   },
 ];
+
+const plans = ref([
+  {
+    title: 'Individual',
+    description: 'Pensado para desarrolladores independientes.',
+    price: '$249',
+    features: ['Un desarrollador', 'Acceso de por vida'],
+    button: {
+      label: 'Comprar ahora',
+    },
+  },
+  {
+    title: 'Equipo',
+    description: 'Ideal para pequeños equipos.',
+    price: '$499',
+    features: ['Hasta 5 desarrolladores', 'Todo en Individual'],
+    button: {
+      label: 'Comprar ahora',
+    },
+  },
+  {
+    title: 'Organización',
+    description: 'Perfecto para equipos y organizaciones más grandes.',
+    price: '$999',
+    features: ['Hasta 20 desarrolladores', 'Todo en Equipo'],
+    button: {
+      label: 'Comprar ahora',
+    },
+  },
+]);
 </script>
 
 <template>
@@ -86,4 +116,12 @@ const sections = [
       <UIcon v-else name="i-lucide-x" class="size-4 text-muted" />
     </template>
   </UPricingTable>
+
+  <UPageSection
+    headline="Precios"
+    title="Precios"
+    description="Descubre nuestros precios y planes."
+  />
+
+  <UPricingPlans orientation="vertical" :plans="plans" />
 </template>

@@ -21,6 +21,8 @@ const items: NavigationMenuItem[] = [
 </script>
 
 <template>
+  <USeparator icon="i-simple-icons-nuxtdotjs" class="mt-10" />
+
   <UFooter>
     <template #left>
       <p class="text-muted text-sm">
