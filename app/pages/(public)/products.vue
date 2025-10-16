@@ -12,35 +12,59 @@
 const products = ref<Product[]>([
   {
     id: '1',
-    name: 'Product 1',
-    description: 'Description 1',
+    slug: 'cloud-storage-saas',
+    name: 'Cloud Storage Pro',
+    description:
+      'Servicio de almacenamiento en la nube seguro y escalable para empresas de cualquier tamaño.',
     price: 100,
-    images: ['https://picsum.photos/200/300'],
-    tags: ['tag1', 'tag2', 'tag3'],
+    images: [
+      'https://picsum.photos/600/400?random=1',
+      'https://picsum.photos/600/400?random=2',
+      'https://picsum.photos/600/400?random=3',
+    ],
+    tags: ['nube', 'almacenamiento', 'SaaS', 'seguridad'],
   },
   {
     id: '2',
-    name: 'Product 2',
-    description: 'Description 2',
+    slug: 'managed-it-services',
+    name: 'IT Support 24/7',
+    description:
+      'Soporte técnico y gestión integral de infraestructura TI, disponible las 24 horas, todos los días.',
     price: 200,
-    images: ['https://picsum.photos/200/300'],
-    tags: ['tag1', 'tag2', 'tag3'],
+    images: [
+      'https://picsum.photos/600/400?random=4',
+      'https://picsum.photos/600/400?random=5',
+      'https://picsum.photos/600/400?random=6',
+    ],
+    tags: ['soporte', 'infraestructura', 'TI', 'empresa'],
   },
   {
     id: '3',
-    name: 'Product 3',
-    description: 'Description 3',
+    slug: 'cybersecurity-suite',
+    name: 'CyberSecurity Suite',
+    description:
+      'Solución completa de ciberseguridad con protección contra amenazas avanzadas, firewall y análisis de vulnerabilidades.',
     price: 300,
-    images: ['https://picsum.photos/200/300'],
-    tags: ['tag1', 'tag2', 'tag3'],
+    images: [
+      'https://picsum.photos/600/400?random=7',
+      'https://picsum.photos/600/400?random=8',
+      'https://picsum.photos/600/400?random=9',
+    ],
+    tags: ['ciberseguridad', 'firewall', 'protección', 'vulnerabilidad'],
   },
   {
     id: '4',
-    name: 'Product 4',
-    description: 'Description 4',
+    slug: 'ai-chatbot-platform',
+    name: 'Plataforma Chatbot IA',
+    description:
+      'Plataforma inteligente para la creación y gestión de chatbots con inteligencia artificial para servicio al cliente.',
     price: 400,
-    images: ['https://picsum.photos/200/300'],
-    tags: ['tag1', 'tag2', 'tag3'],
+    images: [
+      'https://picsum.photos/600/400?random=10',
+      'https://picsum.photos/600/400?random=11',
+      'https://picsum.photos/600/400?random=12',
+    ],
+    tags: ['IA', 'chatbot', 'automatización', 'servicio al cliente'],
   },
 ]);
 </script>

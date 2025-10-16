@@ -20,7 +20,12 @@ defineProps<{
     <template #footer>
       <div class="flex items-center justify-between">
         <p class="text-sm text-gray-500">{{ formatCurrency(product.price) }}</p>
-        <UButton to="#" color="primary" variant="ghost" label="Saber más" />
+        <UButton
+          :to="`/product/${product.slug}`"
+          color="primary"
+          variant="ghost"
+          label="Saber más"
+        />
       </div>
     </template>
   </UCard>
