@@ -61,6 +61,8 @@ const products = ref<Product[]>([
   <div class="mt-10" />
 
   <ProductsGrid :products="products" />
+
+  <SharedPagination :total="100" :model-value="1" :per-page="10" />
 </template>
 
 <style scoped></style>
