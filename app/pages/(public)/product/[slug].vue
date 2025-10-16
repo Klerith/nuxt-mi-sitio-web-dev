@@ -226,7 +226,10 @@ const totalPrice = computed(() => {
     </div>
 
     <!-- <USeparator class="h-[3000px]" /> -->
-    <USeparator class="mt-10" icon="i-lucide-box" />
+    <USeparator class="my-10" icon="i-lucide-box" />
+
+    <!-- Reviews -->
+    <ProductReviews />
 
     <!-- Related Products Section (optional) -->
     <div v-if="product" class="mt-16">
