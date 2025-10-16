@@ -6,52 +6,41 @@ definePageMeta({
   layout: 'login-layout',
 });
 
-const toast = useToast();
-
 const fields: AuthFormField[] = [
   {
     name: 'email',
     type: 'email',
     label: 'Email',
-    placeholder: 'Enter your email',
+    placeholder: 'Correo electrónico',
+    required: true,
+  },
+  {
+    name: 'name',
+    label: 'Nombre',
+    type: 'text',
+    placeholder: 'Nombre',
     required: true,
   },
   {
     name: 'password',
-    label: 'Password',
+    label: 'Contraseña',
     type: 'password',
-    placeholder: 'Enter your password',
+    placeholder: 'Contraseña',
     required: true,
   },
   {
     name: 'remember',
-    label: 'Remember me',
+    label: 'Recordarme en este dispositivo',
     type: 'checkbox',
   },
 ];
 
-const providers = [
-  {
-    label: 'Google',
-    icon: 'i-simple-icons-google',
-    onClick: () => {
-      toast.add({ title: 'Google', description: 'Login with Google' });
-    },
-  },
-  {
-    label: 'GitHub',
-    icon: 'i-simple-icons-github',
-    onClick: () => {
-      toast.add({ title: 'GitHub', description: 'Login with GitHub' });
-    },
-  },
-];
-
 const schema = z.object({
-  email: z.email('Invalid email'),
+  email: z.email('Correo electrónico inválido'),
+  name: z.string('Nombre es requerido'),
   password: z
-    .string('Password is required')
-    .min(8, 'Must be at least 8 characters'),
+    .string('Contraseña es requerida')
+    .min(8, 'Debe tener al menos 8 caracteres'),
 });
 
 type Schema = z.output<typeof schema>;
@@ -69,11 +58,10 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         :ui="{
           leadingIcon: 'text-primary-500 text-5xl',
         }"
-        title="Iniciar sesión"
-        description="Ingresa tus credenciales para acceder a tu cuenta."
+        title="Registrarme"
+        description="Ingresa tus datos para crear tu cuenta."
         icon="i-lucide-user"
         :fields="fields"
-        :providers="providers"
         @submit="onSubmit"
       />
     </UPageCard>
@@ -81,8 +69,8 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
     <UButton
       color="primary"
       variant="ghost"
-      label="¿No tienes una cuenta? Regístrate"
-      to="/register"
+      label="¿Ya tienes una cuenta? Inicia sesión"
+      to="/login"
     />
   </div>
 </template>
