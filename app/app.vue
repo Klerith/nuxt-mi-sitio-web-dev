@@ -21,4 +21,6 @@ h5,
 h6 {
   color: #00dc82;
 } */
+
+/* Transiciones */
 </style>
