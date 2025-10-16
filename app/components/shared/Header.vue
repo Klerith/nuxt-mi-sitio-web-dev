@@ -30,8 +30,8 @@ const items = computed<NavigationMenuItem[]>(() => [
 const responsiveItems = computed(() => [
   ...items.value,
   {
-    label: 'Login',
-    // to: '/login',
+    label: 'Iniciar sesión',
+    to: '/login',
     active: route.path.startsWith('/login'),
   },
 ]);
@@ -59,21 +59,21 @@ const responsiveItems = computed(() => [
         />
       </UTooltip>
 
-      <!-- <UButton
+      <UButton
         color="primary"
         variant="solid"
         icon="i-heroicons-user-circle"
         aria-label="Login"
         to="/login"
         label="Login"
-      /> -->
-      <UButton
+      />
+      <!-- <UButton
         variant="ghost"
         icon="i-heroicons-user"
-        aria-label="Logout"
+        aria-label="Cerrar sesión"
         label="Logout"
         class="cursor-pointer"
-      />
+      /> -->
     </template>
 
     <template #body>
