@@ -1,18 +1,25 @@
 <script setup lang="ts">
 // https://ui.nuxt.com/docs/components/dashboard-sidebar
-import type { NavigationMenuItem } from '@nuxt/ui';
+import {
+  CommandPaletteGroup,
+  type CommandPaletteItem,
+  type NavigationMenuItem,
+} from '@nuxt/ui';
 
 const items: NavigationMenuItem[][] = [
   [
     {
-      label: 'Home',
+      label: 'Inicio',
       icon: 'i-lucide-house',
-      active: true,
+      to: '/dashboard',
+      exact: true,
     },
     {
-      label: 'Inbox',
+      label: 'Productos',
       icon: 'i-lucide-inbox',
       badge: '4',
+      to: '/dashboard/products',
+      exact: false,
     },
     {
       label: 'Contacts',
@@ -50,6 +57,22 @@ const items: NavigationMenuItem[][] = [
     },
   ],
 ];
+
+const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
+  {
+    label: 'Productos',
+    id: 'products',
+    highlightedIcon: 'i-lucide-box',
+    items: [
+      {
+        label: 'Nuevo Producto',
+        id: 'new-product',
+        icon: 'i-lucide-plus',
+        to: '/dashboard/products/new',
+      },
+    ],
+  },
+]);
 </script>
 
 <template>
@@ -64,7 +87,9 @@ const items: NavigationMenuItem[][] = [
     </template>
 
     <template #default="{ collapsed }">
-      <UButton
+      <UDashboardSearchButton />
+      <UDashboardSearch title="Buscar" :groups="searchGroups" />
+      <!-- <UButton
         :label="collapsed ? undefined : 'Search...'"
         icon="i-lucide-search"
         color="neutral"
@@ -78,7 +103,7 @@ const items: NavigationMenuItem[][] = [
             <UKbd value="K" variant="subtle" />
           </div>
         </template>
-      </UButton>
+      </UButton> -->
 
       <UNavigationMenu
         :collapsed="collapsed"
