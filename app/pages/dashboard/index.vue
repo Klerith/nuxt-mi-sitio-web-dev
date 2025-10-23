@@ -3,10 +3,10 @@
     <!-- Header -->
     <div>
       <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
-        Welcome to your Dashboard
+        Bienvenido a tu Dashboard
       </h1>
       <p class="text-gray-600 dark:text-gray-400 mt-2">
-        Here is an overview of your administrative panel
+        Aquí puedes ver un resumen de tu panel administrativo
       </p>
     </div>
 
@@ -104,7 +104,7 @@
       <template #header>
         <div class="flex items-center justify-between">
           <h2 class="text-lg font-semibold">Recent Activities</h2>
-          <UButton variant="ghost" color="gray" label="View all" />
+          <UButton variant="ghost" color="neutral" label="View all" />
         </div>
       </template>
 
