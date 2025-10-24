@@ -29,6 +29,15 @@ const items = computed<NavigationMenuItem[]>(() => [
     // target: '_blank',
   },
 ]);
+
+const responsiveMenu = ref([
+  ...items.value,
+  {
+    label: 'Iniciar sesión',
+    to: '/login',
+    active: route.path.startsWith('/login'),
+  },
+]);
 </script>
 
 <template>
@@ -52,10 +61,22 @@ const items = computed<NavigationMenuItem[]>(() => [
           aria-label="GitHub"
         />
       </UTooltip>
+
+      <UButton
+        color="primary"
+        variant="solid"
+        icon="i-heroicons-user-circle"
+        to="/login"
+        label="Login"
+      />
     </template>
 
     <template #body>
-      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+      <UNavigationMenu
+        :items="responsiveMenu"
+        orientation="vertical"
+        class="-mx-2.5"
+      />
     </template>
   </UHeader>
 </template>
