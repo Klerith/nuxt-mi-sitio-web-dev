@@ -12,6 +12,7 @@ const props = defineProps<{
     :clear="{
       size: 'xl',
       icon: 'i-lucide-arrow-left',
+      // icon: 'humbleicons:brand-twitter',
       class: 'rounded-full',
     }"
     :ui="{
