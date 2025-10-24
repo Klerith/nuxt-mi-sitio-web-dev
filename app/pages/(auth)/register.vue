@@ -55,6 +55,7 @@ const providers = [
 ];
 
 const schema = z.object({
+  name: z.string('Nombre completo es requerido'),
   email: z.email('Correo electrónico inválido'),
   password: z
     .string('La contraseña es requerida')
