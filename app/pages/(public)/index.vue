@@ -1,22 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h1>Home Page</h1>
+  <HomeCTA />
 
-    <UButton icon="i-lucide-rocket" size="md" color="primary" variant="solid"
-      >Button</UButton
-    >
+  <HomeFeatures class="mt-10" />
 
-    <UButton
-      :avatar="{
-        src: 'https://github.com/nuxt.png',
-      }"
-      size="md"
-      color="neutral"
-      variant="outline"
-    >
-      Button
-    </UButton>
-  </div>
+  <HomeTestimonials class="mt-10" />
 </template>
