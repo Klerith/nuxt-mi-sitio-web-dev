@@ -12,6 +12,9 @@
 
 <template>
   <div>Page: products</div>
+
+  <u-button label="primary" color="primary" />
+  <u-button label="secondary" color="secondary" />
 </template>
 
 <style scoped></style>
