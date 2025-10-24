@@ -48,6 +48,12 @@ const cards = ref([
 </script>
 
 <template>
+  <UPageSection
+    title="Servicios"
+    description="Una gran cantidad de servicios para usted"
+    headline="Servicios"
+  />
+
   <UPageGrid>
     <UPageCard v-for="(card, index) in cards" :key="index" v-bind="card">
       <UColorModeImage

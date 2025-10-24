@@ -136,6 +136,12 @@ const testimonials = ref([
 </script>
 
 <template>
+  <UPageSection
+    title="Testimonios"
+    description="Nuestros testimonios de clientes satisfechos"
+    headline="Testimonios"
+  />
+
   <UPageColumns>
     <UPageCard
       variant="solid"
