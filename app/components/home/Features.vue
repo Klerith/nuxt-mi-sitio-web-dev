@@ -48,24 +48,26 @@ const cards = ref([
 </script>
 
 <template>
-  <UPageSection
-    title="Servicios"
-    description="Una gran cantidad de servicios para usted"
-    headline="Servicios"
-  />
+  <div>
+    <UPageSection
+      title="Servicios"
+      description="Una gran cantidad de servicios para usted"
+      headline="Servicios"
+    />
 
-  <UPageGrid>
-    <UPageCard v-for="(card, index) in cards" :key="index" v-bind="card">
-      <UColorModeImage
-        v-if="card.image"
-        :light="`${card.image.path}-light.svg`"
-        :dark="`${card.image.path}-dark.svg`"
-        :width="card.image.width"
-        :height="card.image.height"
-        :alt="card.title"
-        loading="lazy"
-        class="w-full"
-      />
-    </UPageCard>
-  </UPageGrid>
+    <UPageGrid>
+      <UPageCard v-for="(card, index) in cards" :key="index" v-bind="card">
+        <UColorModeImage
+          v-if="card.image"
+          :light="`${card.image.path}-light.svg`"
+          :dark="`${card.image.path}-dark.svg`"
+          :width="card.image.width"
+          :height="card.image.height"
+          :alt="card.title"
+          loading="lazy"
+          class="w-full"
+        />
+      </UPageCard>
+    </UPageGrid>
+  </div>
 </template>
