@@ -6,7 +6,7 @@ definePageMeta({
 
 <template>
   <div>
-    <h3>Hola Mundo - dashboard Page</h3>
+    <!-- <h3>Hola Mundo - dashboard Page</h3> -->
     <NuxtPage />
   </div>
 </template>
