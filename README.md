@@ -73,3 +73,9 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Prisma Migrations
+
+```bash
+npx prisma migrate dev --name add_profile_image_to_site_review
+```
