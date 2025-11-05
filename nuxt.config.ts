@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 // Prisma: https://nuxt.com/modules/prisma
+// https://www.prisma.io/docs/orm/more/help-and-troubleshooting/prisma-nuxt-module#prisma-studio-not-opening-with-pnpm
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -26,6 +27,15 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@prisma/nuxt',
   ],
+  // additional config
+  vite: {
+    resolve: {
+      alias: {
+        '.prisma/client/index-browser':
+          './node_modules/.prisma/client/index-browser.js',
+      },
+    },
+  },
 
   // SPA - Single Page Application
   // ssr: false,
