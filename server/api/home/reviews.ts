@@ -1,4 +1,4 @@
-import prisma from '../../../lib/prisma';
+import prisma from '~~/lib/prisma';
 
 //npx nuxi add api home-reviews
 export default defineEventHandler(async (event) => {
