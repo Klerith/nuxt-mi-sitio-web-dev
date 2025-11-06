@@ -26,6 +26,16 @@ export default defineNuxtConfig({
     '@prisma/nuxt',
   ],
 
+  // additional config
+  vite: {
+    resolve: {
+      alias: {
+        '.prisma/client/index-browser':
+          './node_modules/.prisma/client/index-browser.js',
+      },
+    },
+  },
+
   // SPA - Single Page Application
   // ssr: false,
   // nitro: {
