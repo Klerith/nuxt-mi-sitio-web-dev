@@ -8,7 +8,7 @@
 //     myOtherField: 'Hola mundo',
 //   },
 // });
-const { data } = await usePaginatedProducts();
+const { products, total, currentPage, perPage } = await usePaginatedProducts();
 </script>
 
 <template>
@@ -26,9 +26,13 @@ const { data } = await usePaginatedProducts();
 
   <div class="mt-10" />
 
-  <ProductsGrid :products="data?.products || []" />
+  <ProductsGrid :products="products" />
 
-  <SharedPagination :total="100" :model-value="1" :per-page="10" />
+  <SharedPagination
+    :total="total"
+    :model-value="currentPage"
+    :per-page="perPage"
+  />
 </template>
 
 <style scoped></style>
