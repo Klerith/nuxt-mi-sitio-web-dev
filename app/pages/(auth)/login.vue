@@ -7,6 +7,13 @@ definePageMeta({
 });
 
 const toast = useToast();
+const { login } = useAuthentication();
+const isPosting = ref(false);
+
+const loginEmail = useCookie<string | null>('login_email', {
+  sameSite: 'strict', // Significa que el cookie solo se puede acceder desde el mismo dominio y el mismo sitio
+  maxAge: 60 * 60 * 24 * 30, // 30 días
+});
 
 const fields: AuthFormField[] = [
   {
@@ -15,6 +22,7 @@ const fields: AuthFormField[] = [
     label: 'Email',
     placeholder: 'Enter your email',
     required: true,
+    defaultValue: loginEmail.value ?? '',
   },
   {
     name: 'password',
@@ -27,6 +35,7 @@ const fields: AuthFormField[] = [
     name: 'remember',
     label: 'Remember me',
     type: 'checkbox',
+    defaultValue: Boolean(loginEmail.value),
   },
 ];
 
@@ -52,12 +61,36 @@ const schema = z.object({
   password: z
     .string('Password is required')
     .min(8, 'Must be at least 8 characters'),
+  remember: z.boolean().optional(),
 });
 
 type Schema = z.output<typeof schema>;
 
-function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Submitted', payload);
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
+  const { email, password, remember } = payload.data;
+
+  isPosting.value = true;
+
+  if (remember) {
+    loginEmail.value = email;
+  } else {
+    loginEmail.value = null;
+  }
+
+  try {
+    await login(email, password);
+  } catch (error: unknown) {
+    console.log({ error });
+    toast.add({
+      title: 'Credenciales incorrectas',
+      description: `${(error as Error).message}`,
+    });
+    isPosting.value = false;
+  }
+
+  // console.log('email', email);
+  // console.log('password', password);
+  // console.log('remember', remember);
 }
 </script>
 
@@ -69,6 +102,8 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         :ui="{
           leadingIcon: 'text-primary-500 text-5xl',
         }"
+        :loading="isPosting"
+        :disabled="isPosting"
         title="Iniciar sesión"
         description="Ingresa tus credenciales para acceder a tu cuenta."
         icon="i-lucide-user"
