@@ -16,7 +16,12 @@ const perPage = computed(() => {
 });
 
 const handlePageUpdate = (page: number) => {
-  router.push({ query: { page: page.toString() } });
+  router.push({ 
+    query: { 
+      ...route.query,
+      page: page.toString() 
+    } 
+  });
 };
 </script>
 
