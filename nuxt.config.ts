@@ -19,14 +19,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxt/icon',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@prisma/nuxt',
-  ],
+  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/image', '@nuxt/ui', '@prisma/nuxt', 'nuxt-auth-utils'],
   // additional config
   vite: {
     resolve: {
