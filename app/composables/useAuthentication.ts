@@ -1,7 +1,7 @@
 export const useAuthentication = () => {
   const { loggedIn, session, user, clear, fetch } = useUserSession();
 
-  console.log(user.value?.roles);
+  // console.log(user.value?.roles);
 
   const login = async (email: string, password: string) => {
     const { data, error } = await useFetch('/api/auth/login', {
@@ -42,7 +42,7 @@ export const useAuthentication = () => {
 
     // Getters
     isLoggedIn: loggedIn,
-    // isAdmin: computed(() => user.value?.roles?.includes('admin')),
+    isAdmin: computed(() => user.value?.roles?.includes('admin')),
 
     // Methods, Actions
     login,

@@ -2,8 +2,7 @@
 import type { NavigationMenuItem } from '@nuxt/ui';
 
 const route = useRoute();
-
-const { isLoggedIn, logout } = useAuthentication();
+const { isLoggedIn, logout, isAdmin } = useAuthentication();
 
 const items = computed<NavigationMenuItem[]>(() => [
   {
@@ -26,6 +25,15 @@ const items = computed<NavigationMenuItem[]>(() => [
     to: '/contact',
     active: route.path.startsWith('/contact'),
   },
+  ...(isAdmin.value
+    ? [
+        {
+          label: 'Dashboard',
+          to: '/dashboard',
+          active: route.path.startsWith('/dashboard'),
+        },
+      ]
+    : []),
 ]);
 
 // TODO: falta determinar el estado de la sesión del usuario
@@ -36,6 +44,15 @@ const responsiveItems = computed(() => [
     to: '/login',
     active: route.path.startsWith('/login'),
   },
+  ...(isLoggedIn.value
+    ? [
+        {
+          label: 'Cerrar sesión',
+          to: '/logout',
+          active: route.path.startsWith('/logout'),
+        },
+      ]
+    : []),
 ]);
 </script>
 
@@ -61,25 +78,28 @@ const responsiveItems = computed(() => [
         />
       </UTooltip>
 
-      <UButton
-        v-if="!isLoggedIn"
-        color="primary"
-        variant="solid"
-        icon="i-heroicons-user-circle"
-        aria-label="Login"
-        to="/login"
-        label="Login"
-      />
+      <client-only :placeholder="'...'" fallback-tag="div">
+        <!-- https://nuxt.com/docs/4.x/api/components/client-only -->
+        <UButton
+          v-if="!isLoggedIn"
+          color="primary"
+          variant="solid"
+          icon="i-heroicons-user-circle"
+          aria-label="Login"
+          to="/login"
+          label="Login"
+        />
 
-      <UButton
-        v-else
-        variant="ghost"
-        icon="i-heroicons-user"
-        aria-label="Cerrar sesión"
-        label="Logout"
-        class="cursor-pointer"
-        @click="logout"
-      />
+        <UButton
+          v-else
+          variant="ghost"
+          icon="i-heroicons-user"
+          aria-label="Cerrar sesión"
+          label="Logout"
+          class="cursor-pointer"
+          @click="logout"
+        />
+      </client-only>
     </template>
 
     <template #body>
