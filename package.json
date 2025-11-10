@@ -7,7 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare && pnpm-deduplicate --strategy=highest && prisma generate",
+    "postinstall": "nuxt prepare && pnpm-deduplicate --strategy=highest && prisma generate && rm -f node_modules/.prisma/client/index-browser.js",
     "seed": "ts-node seed/seed-database.ts"
   },
   "dependencies": {
