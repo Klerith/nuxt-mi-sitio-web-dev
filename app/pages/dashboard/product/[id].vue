@@ -1,12 +1,15 @@
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
+const toast = useToast();
 
 const rawId = route.params.id as string;
 const isCreating = computed(() => rawId === 'new');
 
-const { product, error, status, pending } = await useAdminProduct(+rawId);
+const { product, error, status, pending } = await useAdminProduct(rawId);
 const newProduct = ref<Product | null>({ ...product.value } as Product);
+
+console.log({ product: newProduct.value });
 
 if (error.value) {
   await navigateTo('/404');
@@ -40,14 +43,19 @@ const handleSubmit = async () => {
     router.push(
       `/dashboard/product/${product.id}?message=Producto creado correctamente&type=success`
     );
-  } else {
-    const { product } = await $fetch(`/api/admin/product/${rawId}`, {
-      method: 'PATCH',
-      body: newProduct.value,
-    });
-    newProduct.value = product;
+    return;
   }
 
+  const { product } = await $fetch(`/api/admin/product/${rawId}`, {
+    method: 'PATCH',
+    body: newProduct.value,
+  });
+  newProduct.value = product;
+
+  toast.add({
+    title: 'Producto actualizado correctamente',
+    description: `El producto ${newProduct.value.name} ha sido actualizado correctamente.`,
+  });
   isSubmitting.value = false;
 };
 
@@ -277,20 +285,24 @@ const handleCancel = () => {
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
-          <button
+          <UButton
             type="submit"
-            class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 font-semibold text-white shadow-sm transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-blue-400 disabled:opacity-75 dark:focus:ring-offset-gray-900"
+            color="primary"
+            variant="solid"
             :disabled="isSubmitting"
+            icon="i-lucide-save"
           >
             {{ isSubmitting ? 'Guardando...' : 'Guardar producto' }}
-          </button>
-          <button
+          </UButton>
+          <UButton
             type="button"
-            class="inline-flex items-center rounded-md border border-gray-300 px-4 py-2 font-semibold text-gray-700 shadow-sm transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 dark:focus:ring-offset-gray-900"
+            color="neutral"
+            variant="outline"
+            icon="i-lucide-x"
             @click="handleCancel"
           >
             Cancelar
-          </button>
+          </UButton>
         </div>
       </form>
 

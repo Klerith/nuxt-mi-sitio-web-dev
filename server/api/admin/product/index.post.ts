@@ -8,8 +8,8 @@ const bodySchema = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
   price: z.number().min(0),
-  images: z.array(z.string()).min(1),
-  tags: z.array(z.string()).min(1),
+  images: z.array(z.string()),
+  tags: z.array(z.string()),
 });
 
 export default defineEventHandler(async (event) => {

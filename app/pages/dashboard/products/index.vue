@@ -15,6 +15,7 @@
         label="Agregar Producto"
         color="primary"
         size="lg"
+        to="/dashboard/product/new"
       />
     </div>
 
