@@ -2,17 +2,12 @@
   "name": "02-mi-sitio",
   "type": "module",
   "private": true,
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@prisma/client"
-    ]
-  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && pnpm-deduplicate --strategy=highest && prisma generate",
     "seed": "ts-node seed/seed-database.ts"
   },
   "dependencies": {
@@ -34,6 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
+    "pnpm-deduplicate": "^0.4.2",
     "ts-node": "^10.9.2"
   }
 }

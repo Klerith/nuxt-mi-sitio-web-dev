@@ -3,6 +3,8 @@ import type { NavigationMenuItem } from '@nuxt/ui';
 
 const route = useRoute();
 
+const { isLoggedIn, logout } = useAuthentication();
+
 const items = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Productos',
@@ -60,6 +62,7 @@ const responsiveItems = computed(() => [
       </UTooltip>
 
       <UButton
+        v-if="!isLoggedIn"
         color="primary"
         variant="solid"
         icon="i-heroicons-user-circle"
@@ -67,13 +70,16 @@ const responsiveItems = computed(() => [
         to="/login"
         label="Login"
       />
-      <!-- <UButton
+
+      <UButton
+        v-else
         variant="ghost"
         icon="i-heroicons-user"
         aria-label="Cerrar sesión"
         label="Logout"
         class="cursor-pointer"
-      /> -->
+        @click="logout"
+      />
     </template>
 
     <template #body>

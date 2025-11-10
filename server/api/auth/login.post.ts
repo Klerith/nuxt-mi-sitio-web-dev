@@ -40,6 +40,7 @@ export default defineEventHandler(async (event) => {
 
   await setUserSession(event, {
     user: {
+      id: user.id,
       name: user.name,
       email: user.email,
       roles: user.roles,
@@ -48,6 +49,7 @@ export default defineEventHandler(async (event) => {
   return {
     message: 'Login successful',
     user: {
+      id: user.id,
       name: user.name,
       email: user.email,
       roles: user.roles,
