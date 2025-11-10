@@ -6,6 +6,8 @@ import {
   type NavigationMenuItem,
 } from '@nuxt/ui';
 
+const { user } = useAuthentication();
+
 const items: NavigationMenuItem[][] = [
   [
     {
@@ -134,7 +136,7 @@ const searchGroups = ref<CommandPaletteGroup<CommandPaletteItem>[]>([
         :avatar="{
           src: 'https://github.com/benjamincanac.png',
         }"
-        :label="collapsed ? undefined : 'Benjamin'"
+        :label="collapsed ? undefined : user?.name"
         color="neutral"
         variant="ghost"
         class="w-full"

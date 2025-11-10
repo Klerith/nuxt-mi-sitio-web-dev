@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const { data } = await useFetch('/api/home/reviews');
 const reviews = data.value?.reviews;
-
-console.log(reviews);
 </script>
 
 <template>
