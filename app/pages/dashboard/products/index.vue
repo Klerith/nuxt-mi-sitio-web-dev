@@ -33,6 +33,7 @@ import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
 
 const UBadge = resolveComponent('UBadge');
+const NuxtLink = resolveComponent('NuxtLink');
 
 const { products, totalPages, currentPage, perPage, total } =
   await usePaginatedProducts();
@@ -61,7 +62,15 @@ const columns: TableColumn<Product>[] = [
   {
     accessorKey: 'name',
     header: 'Nombre',
-    cell: ({ row }) => row.getValue('name'),
+    cell: ({ row }) =>
+      h(
+        NuxtLink,
+        {
+          to: `/dashboard/product/${row.getValue('id')}`,
+          class: 'text-blue-500 hover:text-blue-700 underline cursor-pointer',
+        },
+        () => row.getValue('name')
+      ),
   },
   {
     accessorKey: 'description',
