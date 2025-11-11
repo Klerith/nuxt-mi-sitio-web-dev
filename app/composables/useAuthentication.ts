@@ -8,6 +8,7 @@ export const useAuthentication = () => {
         body: { email, password },
       });
 
+      await fetch();
       navigateTo('/?message=Login successful');
 
       return true;
@@ -38,6 +39,8 @@ export const useAuthentication = () => {
     user,
 
     // Getters
+    isLoggedIn: loggedIn,
+    isAdmin: computed(() => user.value?.roles.includes('admin')),
 
     // Methods, Acciones
     fetch,
