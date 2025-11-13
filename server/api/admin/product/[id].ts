@@ -4,16 +4,16 @@ export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id') as string;
 
   // Todo: revisar sesión de usuario
-  const session = await requireUserSession(event);
-  // const session = await getUserSession(event);
-  const hasAdminRole = session.user.roles.includes('admin');
+  // const session = await requireUserSession(event);
+  // // const session = await getUserSession(event);
+  // const hasAdminRole = session.user.roles.includes('admin');
 
-  if (!hasAdminRole) {
-    throw createError({
-      statusCode: 401,
-      message: `Unauthorized`,
-    });
-  }
+  // if (!hasAdminRole) {
+  //   throw createError({
+  //     statusCode: 401,
+  //     message: `Unauthorized`,
+  //   });
+  // }
 
   const product = await prisma.product.findUnique({
     where: {
