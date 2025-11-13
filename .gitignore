@@ -20,6 +20,6 @@ logs
 
 # Local env files
 .env
-!.env.example
+!.env.template
 
 /app/generated/prisma
