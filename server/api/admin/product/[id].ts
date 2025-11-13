@@ -1,3 +1,4 @@
+import { Product } from '@prisma/client';
 import prisma from '~~/lib/prisma';
 
 export default defineEventHandler(async (event) => {
@@ -14,6 +15,20 @@ export default defineEventHandler(async (event) => {
   //     message: `Unauthorized`,
   //   });
   // }
+
+  if (id === 'new') {
+    return {
+      id: 0,
+      slug: '',
+      name: '',
+      description: '',
+      price: 0,
+      images: [],
+      tags: [],
+      updatedAt: new Date(),
+      createdAt: new Date(),
+    } as Product;
+  }
 
   const product = await prisma.product.findUnique({
     where: {
