@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { z } from 'zod';
+
 const route = useRoute();
 
 // Variables
@@ -31,13 +33,60 @@ const subtitle = computed(() =>
     : 'Actualiza la in formación del producto seleccionado'
 );
 
+const productSchema = z.object({
+  slug: z.string().nonempty('El Slug es requerido'),
+  name: z.string().nonempty('El nombre es requerido'),
+  description: z.string().nonempty('La descripción es requerida'),
+  price: z.number().min(0, 'El precio es requerido'),
+});
+
+const checkValidations = () => {
+  fieldErrors.value = {};
+
+  const result = productSchema.safeParse(newProduct.value);
+
+  if (!result.success) {
+    result.error.issues.forEach((issue) => {
+      const field = issue.path[0];
+
+      if (typeof field === 'string') {
+        fieldErrors.value[field] = issue.message;
+      }
+    });
+
+    return false;
+  }
+
+  // Si quieres, aquí puedes sobreescribir newProduct con los valores parseados
+  // newProduct.value = result.data;
+
+  return true;
+};
+
 const handleSubmit = () => {
+  const isFormValid = checkValidations();
+  if (!isFormValid) {
+    return;
+  }
+
+  newProduct.value!.tags = `${newProduct.value!.tags}`.split(',');
+
   console.log({ newProduct: newProduct.value });
 };
 
 const handleCancel = () => {
-  navigateTo('/admin/products');
+  navigateTo('/dashboard/products');
 };
+
+watch(
+  newProduct,
+  () => {
+    checkValidations();
+  },
+  {
+    deep: true,
+  }
+);
 </script>
 
 <template>
