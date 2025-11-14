@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { z } from 'zod';
 
+const router = useRouter();
 const route = useRoute();
 const toast = useToast();
 
@@ -75,6 +76,16 @@ const handleSubmit = async () => {
 
   console.log(newProduct.value);
   const product = await createOrUpdate(newProduct.value);
+
+  if (isCreating.value) {
+    // navigateTo
+    router.replace(
+      `/dashboard/product/${product.id}?message=Producto creado correctamente`
+    );
+    return;
+  }
+
+  // TODO: limpiar los archivos seleccionados
 
   toast.add({
     title: 'Producto actualizado correctamente',
@@ -310,6 +321,7 @@ watch(
               placeholder="https://ejemplo.com/imagen-1.jpg"
             /> -->
             <UInput
+              v-if="!isCreating"
               type="file"
               multiple
               id="product-images"
