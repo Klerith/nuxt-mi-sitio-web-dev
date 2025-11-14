@@ -2,6 +2,7 @@
 import { z } from 'zod';
 
 const route = useRoute();
+const toast = useToast();
 
 // Variables
 const rawId = route.params.id as string;
@@ -63,15 +64,22 @@ const checkValidations = () => {
   return true;
 };
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   const isFormValid = checkValidations();
   if (!isFormValid) {
     return;
   }
+  if (!newProduct.value) return;
 
   newProduct.value!.tags = `${newProduct.value!.tags}`.split(',');
 
-  console.log({ newProduct: newProduct.value });
+  console.log(newProduct.value);
+  const product = await createOrUpdate(newProduct.value);
+
+  toast.add({
+    title: 'Producto actualizado correctamente',
+    description: `El producto ${product.name}, ha sido actualizado correctamente`,
+  });
 };
 
 const handleCancel = () => {
@@ -187,18 +195,7 @@ watch(
             ]"
             placeholder="Describe el producto con claridad..."
           />
-          <!-- <UInput
-              type="file"
-              multiple
-              id="product-images"
-              rows="4"
-              :class="[
-                'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
-                fieldErrors.imagesInput
-                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
-              ]"
-            /> -->
+
           <p v-if="fieldErrors.description" class="text-sm text-red-600">
             {{ fieldErrors.description }}
           </p>
@@ -300,7 +297,7 @@ watch(
                 </button>
               </div>
             </div>
-            <textarea
+            <!-- <textarea
               id="product-images"
               v-model="newProduct.images"
               rows="4"
@@ -311,6 +308,18 @@ watch(
                   : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
               ]"
               placeholder="https://ejemplo.com/imagen-1.jpg"
+            /> -->
+            <UInput
+              type="file"
+              multiple
+              id="product-images"
+              rows="4"
+              :class="[
+                'block w-full rounded-md bg-white px-3 py-2 shadow-sm focus:outline-none dark:bg-gray-900 dark:text-gray-100',
+                fieldErrors.imagesInput
+                  ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
+                  : 'border-gray-300 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700',
+              ]"
             />
             <p class="text-sm text-gray-500 dark:text-gray-400">
               Ingresa una URL por línea.

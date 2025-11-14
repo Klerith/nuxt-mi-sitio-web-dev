@@ -5,8 +5,11 @@ export const useAdminProduct = async (id: string) => {
 
   const createOrUpdate = async (data: Partial<Product>, files?: File[]) => {
     const isCreating = data.id === 0;
+    const formData = new FormData();
 
-    //form-Multipart data + archivos
+    //TODO: form-Multipart data + archivos
+
+    formData.append('data', JSON.stringify(data));
 
     // if ( isCreating) {
     //   // TODO: crear endpoint
@@ -18,11 +21,26 @@ export const useAdminProduct = async (id: string) => {
     //   return algo;
     // }
 
-    // TODO: actualizar producto
-    // const { algo } = await $fetch('', {
-    //   method: 'PATCH',
-    //   body: data
-    // })
+    if (!isCreating) {
+      try {
+        const { product } = await $fetch(`/api/admin/product/${id}`, {
+          method: 'PATCH',
+          body: formData,
+        });
+
+        return product;
+      } catch (error) {
+        throw createError({
+          status: 400,
+          message: error instanceof Error ? error.message : 'Unknown error',
+        });
+      }
+    }
+
+    throw createError({
+      status: 501,
+      message: 'Product creation is not implemented yet',
+    });
   };
 
   return {
