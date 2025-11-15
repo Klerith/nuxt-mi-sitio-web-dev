@@ -6,6 +6,7 @@ const route = useRoute();
 const toast = useToast();
 
 const filesToUpload = ref<File[]>([]);
+const filesToUploadPreviews = ref<string[]>([]);
 
 const messageQuery = route.query.message as string;
 if (messageQuery) {
@@ -120,9 +121,19 @@ const handleFilesChanged = (event: Event) => {
   if (!files) return;
 
   filesToUpload.value = Array.from(files);
-  console.log({ files: filesToUpload.value });
 
-  // TODO: crear una vista previa del archivo a subir
+  // Crear una vista previa del archivo a subir
+  filesToUploadPreviews.value = filesToUpload.value.map((file) => {
+    return URL.createObjectURL(file);
+  });
+};
+
+const removeFilePreview = (index: number) => {
+  filesToUploadPreviews.value = filesToUploadPreviews.value.filter(
+    (file, i) => i !== index
+  );
+
+  filesToUpload.value = filesToUpload.value.filter((file, i) => i !== index);
 };
 
 watch(
@@ -317,7 +328,7 @@ watch(
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <button
                   v-for="(image, index) in newProduct.images"
-                  :key="image + index"
+                  :key="image"
                   type="button"
                   class="overflow-hidden rounded-md border-2 transition"
                   :class="
@@ -336,6 +347,31 @@ watch(
                 </button>
               </div>
             </div>
+
+            <!-- Files to upload preview -->
+            <ClientOnly>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div
+                  v-for="(image, index) in filesToUploadPreviews"
+                  :key="image"
+                >
+                  <div class="overflow-hidden rounded-lg relative">
+                    <img
+                      :src="image"
+                      :alt="`Previsualización ${index + 1}`"
+                      class="h-20 w-full object-cover"
+                    />
+                    <UButton
+                      color="error"
+                      icon="i-lucide-x"
+                      class="absolute top-2 right-2"
+                      @click="removeFilePreview(index)"
+                    />
+                  </div>
+                </div>
+              </div>
+            </ClientOnly>
+
             <!-- <textarea
               id="product-images"
               v-model="newProduct.images"
