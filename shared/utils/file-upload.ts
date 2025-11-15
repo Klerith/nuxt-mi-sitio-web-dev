@@ -38,12 +38,17 @@ export const fileUpload = async (fileBuffer: Buffer<ArrayBufferLike>) => {
       }
     );
 
-    console.log({ result: uploadResult.result });
+    const cloudinaryPublicId = uploadResult.result!.public_id;
+    console.log({
+      cloudinaryPublicId,
+      uuidFileName,
+    });
+
     if (!uploadResult.success) {
       throw new Error('Cant upload image');
     }
 
-    const optimizeUrl = cloudinary.url(uuidFileName, {
+    const optimizeUrl = cloudinary.url(cloudinaryPublicId, {
       fetch_format: 'auto',
       quality: 'auto',
       width: 600,
