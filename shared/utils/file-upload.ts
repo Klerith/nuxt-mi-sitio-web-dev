@@ -39,10 +39,6 @@ export const fileUpload = async (fileBuffer: Buffer<ArrayBufferLike>) => {
     );
 
     const cloudinaryPublicId = uploadResult.result!.public_id;
-    console.log({
-      cloudinaryPublicId,
-      uuidFileName,
-    });
 
     if (!uploadResult.success) {
       throw new Error('Cant upload image');

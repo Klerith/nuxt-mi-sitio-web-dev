@@ -82,6 +82,7 @@ const handleSubmit = async () => {
     return;
   }
   if (!newProduct.value) return;
+  isSubmitting.value = true;
 
   newProduct.value!.tags = `${newProduct.value!.tags}`.split(',');
 
@@ -90,6 +91,7 @@ const handleSubmit = async () => {
     newProduct.value,
     filesToUpload.value.length > 0 ? filesToUpload.value : undefined
   );
+  newProduct.value = product;
 
   if (isCreating.value) {
     // navigateTo
@@ -99,12 +101,14 @@ const handleSubmit = async () => {
     return;
   }
 
-  // TODO: limpiar los archivos seleccionados
+  // limpiar los archivos seleccionados
+  filesToUpload.value = [];
 
   toast.add({
     title: 'Producto actualizado correctamente',
     description: `El producto ${product.name}, ha sido actualizado correctamente`,
   });
+  isSubmitting.value = false;
 };
 
 const handleCancel = () => {
