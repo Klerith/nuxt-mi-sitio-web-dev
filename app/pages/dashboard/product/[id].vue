@@ -349,7 +349,7 @@ watch(
               placeholder="https://ejemplo.com/imagen-1.jpg"
             /> -->
             <UInput
-              v-if="!isCreating"
+              v-if="!isCreating && !isSubmitting"
               @change="handleFilesChanged($event)"
               type="file"
               multiple
