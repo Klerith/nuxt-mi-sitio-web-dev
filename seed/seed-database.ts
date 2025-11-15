@@ -34,11 +34,12 @@ async function seedDatabase() {
 
   // Obtener los productos (usuarios) para tomar sus ids
   const productsCreated = await prisma.product.findMany();
-  // Todo: usuarios
+  const usersCreated = await prisma.user.findMany();
 
   const productReviewsCreated = productReviews.map((review) => ({
     ...review,
     productId: productsCreated[Math.floor(Math.random() * products.length)].id,
+    userId: usersCreated[Math.floor(Math.random() * users.length)].id,
   }));
 
   await prisma.productReview.createMany({

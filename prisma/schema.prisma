@@ -45,17 +45,24 @@ model ProductReview {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // Relación
+  // Relaciones
   product   Product @relation(fields: [productId], references: [id])
   productId Int
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String
-  roles     String[]
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  name     String
+  roles    String[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // Relaciones
+  productReviews ProductReview[]
 }
