@@ -5,6 +5,8 @@ const router = useRouter();
 const route = useRoute();
 const toast = useToast();
 
+const filesToUpload = ref<File[]>([]);
+
 const messageQuery = route.query.message as string;
 if (messageQuery) {
   toast.add({
@@ -84,7 +86,10 @@ const handleSubmit = async () => {
   newProduct.value!.tags = `${newProduct.value!.tags}`.split(',');
 
   console.log(newProduct.value);
-  const product = await createOrUpdate(newProduct.value);
+  const product = await createOrUpdate(
+    newProduct.value,
+    filesToUpload.value.length > 0 ? filesToUpload.value : undefined
+  );
 
   if (isCreating.value) {
     // navigateTo
@@ -104,6 +109,16 @@ const handleSubmit = async () => {
 
 const handleCancel = () => {
   navigateTo('/dashboard/products');
+};
+
+const handleFilesChanged = (event: Event) => {
+  const files = (event.target as HTMLInputElement).files;
+  if (!files) return;
+
+  filesToUpload.value = Array.from(files);
+  console.log({ files: filesToUpload.value });
+
+  // TODO: crear una vista previa del archivo a subir
 };
 
 watch(
@@ -331,6 +346,7 @@ watch(
             /> -->
             <UInput
               v-if="!isCreating"
+              @change="handleFilesChanged($event)"
               type="file"
               multiple
               id="product-images"

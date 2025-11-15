@@ -7,9 +7,14 @@ export const useAdminProduct = async (id: string) => {
     const isCreating = data.id === 0;
     const formData = new FormData();
 
-    //TODO: form-Multipart data + archivos
-
     formData.append('data', JSON.stringify(data));
+
+    // Si hay archivos cárgalos
+    if (files) {
+      files.forEach((file) => {
+        formData.append('files', file); // files: [file1, file2, file3]
+      });
+    }
 
     if (isCreating) {
       // TODO: crear endpoint
