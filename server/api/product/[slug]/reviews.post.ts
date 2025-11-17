@@ -51,6 +51,8 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  console.log({ userId });
+
   const review = await prisma.productReview.create({
     data: {
       name: session.user.name,

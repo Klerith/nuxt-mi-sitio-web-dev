@@ -2,7 +2,7 @@
 import type { User } from '#auth-utils';
 import type { ProductReview } from '@prisma/client';
 
-defineProps<{
+const props = defineProps<{
   buttonLabel: string;
   slug: string;
   user: User | null;
@@ -12,12 +12,41 @@ const emit = defineEmits<{
   (event: 'review-posted', review: ProductReview): void;
 }>();
 
+const toast = useToast();
+
 const reviewText = ref('');
 const userTitle = ref('');
 const rating = ref(0);
 const isOpen = ref(false);
-const submitReview = () => {
-  console.log('submitReview');
+
+const submitReview = async () => {
+  // no usar useFetch  => $fetch
+  try {
+    const review = await $fetch<ProductReview>(
+      `/api/product/${props.slug}/reviews`,
+      {
+        method: 'POST',
+        body: {
+          rating: rating.value,
+          review: reviewText.value,
+          userTitle: reviewText.value,
+        },
+      }
+    );
+
+    emit('review-posted', review);
+    toast.add({
+      title: 'Reseña enviada',
+      description: 'Tu reseña ha sido enviada correctamente.',
+    });
+  } catch (error) {
+    toast.add({
+      title: 'Error al enviar reseña',
+      description: error instanceof Error ? error.message : 'Unknown error',
+      color: 'error',
+    });
+  }
+
   isOpen.value = false;
 };
 
