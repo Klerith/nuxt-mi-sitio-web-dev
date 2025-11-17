@@ -23,6 +23,6 @@ const { data: productSuggestions, status } = useFetch(
       <USkeleton class="w-full h-52 rounded-md mb-4" />
     </div>
 
-    <ProductsGrid v-else :products="productSuggestions || []" />
+    <ProductsGrid v-else :products="productSuggestions || []" class="fade-in" />
   </div>
 </template>
