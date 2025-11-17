@@ -5,16 +5,18 @@ const slug = route.params.slug as string;
 
 const { product } = await useProduct(slug);
 
+// https://nuxt.com/docs/4.x/api/composables/use-seo-meta
+// Reactive values
 useSeoMeta({
-  title: product.value?.name || 'Producto',
-  description: product.value?.description || '',
-  ogTitle: product.value?.name || 'Producto',
-  ogDescription: product.value?.description || '',
-  ogImage: product.value?.images?.[0] || '',
+  title: () => product.value?.name || 'Producto',
+  description: () => product.value?.description || '',
+  ogTitle: () => product.value?.name || 'Producto',
+  ogDescription: () => product.value?.description || '',
+  ogImage: () => product.value?.images?.[0] || '',
   twitterCard: 'summary_large_image',
-  twitterTitle: product.value?.name || 'Producto',
-  twitterDescription: product.value?.description || '',
-  twitterImage: product.value?.images?.[0] || '',
+  twitterTitle: () => product.value?.name || 'Producto',
+  twitterDescription: () => product.value?.description || '',
+  twitterImage: () => product.value?.images?.[0] || '',
 });
 
 // Si no se encuentra el producto, mostrar error 404
