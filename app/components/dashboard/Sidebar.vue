@@ -1,9 +1,9 @@
 <script setup lang="ts">
 // https://ui.nuxt.com/docs/components/dashboard-sidebar
-import {
-  type CommandPaletteGroup,
-  type CommandPaletteItem,
-  type NavigationMenuItem,
+import type {
+  CommandPaletteItem,
+  CommandPaletteGroup,
+  NavigationMenuItem,
 } from '@nuxt/ui';
 
 const { user } = useAuthentication();
